@@ -26,26 +26,6 @@ def install_pip():
         os.environ.pop("PIP_REQ_TRACKER", None)
 
 
-def install_dependencies():
-    DEPENDENCIES = (
-        "numpy",
-        "pydantic",
-        "websocket-client",
-        "mixpanel",
-    )
-
-    env_var = dict(os.environ)
-    # ensures pip installs dependencies on blender's python lib folder
-    env_var["PYTHONNOUSERSITE"] = "1"
-
-    for dep in DEPENDENCIES:
-        print(f"Installing {dep}")
-        subprocess.run(
-            [sys.executable, "-m", "pip", "install", dep], check=True, env=env_var
-        )
-        print(f"Installed {dep}")
-
-
 def install_dependencies_from_requirements():
     env_var = dict(os.environ)
     # ensures pip installs dependencies on blender's python lib folder
@@ -68,9 +48,7 @@ def install_dependencies_from_requirements():
 def install() -> None:
     install_pip()
 
-    install_dependencies()
-    # or
-    # install_dependencies_from_requirements()
+    install_dependencies_from_requirements()
 
 
 if __name__ == "__main__":
